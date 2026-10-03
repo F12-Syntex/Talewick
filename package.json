@@ -1,0 +1,39 @@
+{
+  "name": "talewick",
+  "productName": "Talewick",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Advanced desktop book reader",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k -n next,electron -c blue,magenta \"npm:dev:next\" \"npm:dev:electron\"",
+    "dev:next": "next dev --port 3000",
+    "dev:electron": "npm run build:electron && wait-on tcp:3000 && electron . --dev",
+    "build": "next build && npm run build:electron",
+    "build:electron": "esbuild electron/main.ts electron/preload.ts --bundle --platform=node --format=cjs --target=node22 --outdir=dist-electron --external:electron --sourcemap",
+    "start": "electron .",
+    "dist": "npm run build && electron-builder",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit && tsc -p electron/tsconfig.json"
+  },
+  "dependencies": {
+    "next": "^16.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "concurrently": "^10.0.5",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "esbuild": "^0.28.2",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.8",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "wait-on": "^9.5.1"
+  }
+}

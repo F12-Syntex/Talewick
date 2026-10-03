@@ -1,0 +1,20 @@
+appId: com.talewick.app
+productName: Talewick
+directories:
+  output: release
+files:
+  - dist-electron/**
+  - out/**
+  - package.json
+asar: true
+win:
+  target: nsis
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+mac:
+  target: dmg
+  category: public.app-category.books
+linux:
+  target: AppImage
+  category: Office

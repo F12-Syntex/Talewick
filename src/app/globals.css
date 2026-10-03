@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Design tokens. Themes later override these variables. */
+:root {
+  --background: #0e0e11;
+  --surface: #141418;
+  --surface-hover: #1f1f25;
+  --border: #23232a;
+  --fg: #ececf1;
+  --fg-muted: #8b8b98;
+  --accent: #c9a26b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Electron window dragging for the frameless title bar. */
+.drag {
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}

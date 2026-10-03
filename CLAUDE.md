@@ -1,5 +1,31 @@
 # Talewick
 
+Advanced desktop book reader. Electron + Next.js (App Router, static export) + React 19 + Tailwind v4 + TypeScript.
+
+## Commands
+
+- `npm run dev`: Next dev server on :3000 plus Electron pointed at it (`--dev`). F12 toggles DevTools in dev only.
+- `npm run build`: `next build` to `out/`, then esbuild bundles `electron/` to `dist-electron/`.
+- `npm start`: run the production build in Electron.
+- `npm run dist`: package installers into `release/` (electron-builder).
+- `npm run typecheck` / `npm run lint`: run both before every commit.
+
+## Structure
+
+- `electron/`: main process. `main.ts` boots the app, `window.ts` creates the frameless window, `protocol.ts` serves `out/` under `app://talewick/`, `ipc/` holds one file per IPC domain, registered from `ipc/index.ts`.
+- `electron/preload.ts`: the only bridge. Exposes `window.talewick` (typed by `TalewickApi`).
+- `shared/`: code used by both processes. `shared/ipc.ts` is the IPC contract (channel names plus API types).
+- `src/app/`: Next routes. `src/components/shell/`: app chrome (title bar, window controls). `src/lib/`: renderer utilities (`useBridge()`).
+- New features go in `src/features/<feature>/` (components, hooks, state), with matching `electron/ipc/<feature>.ts` when they need the main process.
+
+## Conventions
+
+- Renderer never touches Node or Electron directly. Add a channel to `shared/ipc.ts`, a handler in `electron/ipc/`, then expose it in `preload.ts`.
+- Keep the window sandboxed (`contextIsolation`, `sandbox`, no `nodeIntegration`).
+- No menu bar, no Next dev indicator (`devIndicators: false`), custom title bar only.
+- Static export only: no server actions, API routes or dynamic SSR. Data comes through IPC.
+- Colours come from CSS tokens in `src/app/globals.css` (`bg-surface`, `text-fg-muted`, etc.), not hard-coded hex.
+
 ## Git workflow
 
 After each completed, working change, always commit and push to `origin/main` automatically. Never ask for permission and never leave committing or pushing to the user.
