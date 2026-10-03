@@ -4,11 +4,13 @@ Advanced desktop book reader. Electron + Next.js (App Router, static export) + R
 
 ## Commands
 
-- `npm run dev`: Next dev server on :3000 plus Electron pointed at it (`--dev`). F12 toggles DevTools in dev only.
-- `npm run build`: `next build` to `out/`, then esbuild bundles `electron/` to `dist-electron/`.
-- `npm start`: run the production build in Electron.
-- `npm run dist`: package installers into `release/` (electron-builder).
-- `npm run typecheck` / `npm run lint`: run both before every commit.
+Package manager is yarn (v1). Never use npm or commit a `package-lock.json`.
+
+- `yarn dev`: Next dev server on :3000 plus Electron pointed at it (`--dev`). F12 toggles DevTools in dev only.
+- `yarn build`: `next build` to `out/`, then esbuild bundles `electron/` to `dist-electron/`.
+- `yarn start`: run the production build in Electron.
+- `yarn dist`: package installers into `release/` (electron-builder).
+- `yarn typecheck` / `yarn lint`: run both before every commit.
 
 ## Structure
 
@@ -71,3 +73,13 @@ Steps for each commit:
 3. Stage the change plus the version file(s) in the same commit.
 4. Commit with the version in the subject.
 5. Push to `origin/main`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
