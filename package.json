@@ -1,7 +1,7 @@
 {
   "name": "talewick",
   "productName": "Talewick",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": true,
   "description": "Advanced desktop book reader",
   "main": "dist-electron/main.js",
@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit && tsc -p electron/tsconfig.json"
   },
   "dependencies": {
+    "lucide-react": "^1.51.0",
     "next": "^16.3.8",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"

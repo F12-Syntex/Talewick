@@ -90,5 +90,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `design-system/` is the source of truth for UI: tokens, 6 themes (`data-theme` on `<html>`, default `ember`), components, guidelines, voice. Load the `talewick-design` skill before any UI work.
 - `src/app/globals.css` imports `design-system/tokens/*.css` directly, so token edits apply to the app. Fonts are self-hosted with next/font (Geist, Geist Mono, Newsreader, Cinzel), not the Google Fonts link in `tokens/fonts.css`.
 - Design system tokens override Tailwind defaults where names match: `rounded-lg` is 14px, `text-xl` is 22px, `shadow-*` and `ease-out` are the system's values.
-- Components in `design-system/components/` are reference `.jsx`. Port to TSX + Tailwind in `src/components/` only when needed. Already ported: TitleBar (`arcane` variant), WindowControls (`pill`), Wordmark.
+- Components in `design-system/components/` are reference `.jsx`. Port to TSX + Tailwind in `src/components/` only when needed. Ported so far: shell (TitleBar `arcane`, WindowControls `pill`), Wordmark, ui (Button, IconButton, Input, Kbd, SegmentedControl, ProgressBar, Tooltip), navigation (Sidebar), reader (BookCover, HypeIndicator), effects (ShaderBackground, SpotlightCard), arcana (Ornament, OrnateFrame, MoteField).
+- Icons: `lucide-react`, `strokeWidth={1.5}`, 14-16px.
+- Library data comes from `useLibrary()` in `src/features/library/use-library.ts`. It returns `sample-library.ts` until import exists; replace it there, not in components.
 - The design system is not linted and not part of the build. Do not import its `.jsx` into the app.
