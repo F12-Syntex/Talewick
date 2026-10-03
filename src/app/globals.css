@@ -13,7 +13,9 @@
 @import "../../design-system/tokens/effects.css";
 @import "../../design-system/tokens/motion.css";
 @import "../../design-system/tokens/themes.css";
-@import "../../design-system/tokens/base.css";
+/* Base element styles go in Tailwind's base layer so utility classes can override them
+   (unlayered, its `a { color: var(--accent) }` beat every text-* class on links). */
+@import "../../design-system/tokens/base.css" layer(base);
 
 /* Point the font tokens at the self-hosted next/font families. */
 :root {

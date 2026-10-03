@@ -15,7 +15,7 @@ Package manager is yarn (v1). Never use npm or commit a `package-lock.json`.
 
 ## Structure
 
-- `electron/`: main process. `main.ts` boots the app, `window.ts` creates the frameless window, `protocol.ts` serves `out/` under `app://talewick/`, `ipc/` holds one file per IPC domain, registered from `ipc/index.ts`.
+- `electron/`: main process. `main.ts` boots the app (grayscale text anti-aliasing via `disable-lcd-text`), `window.ts` creates the frameless window, `protocol.ts` serves `out/` under `app://talewick/` (including Next's route segment data files), `ipc/` holds one file per IPC domain, registered from `ipc/index.ts`.
 - `electron/preload.ts`: the only bridge. Exposes `window.talewick` (typed by `TalewickApi`).
 - `shared/`: code used by both processes. `shared/ipc.ts` is the IPC contract (channel names plus API types).
 - `src/app/`: Next routes. `src/components/shell/`: app chrome (title bar, window controls). `src/lib/`: renderer utilities (`useBridge()`).
@@ -91,9 +91,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `design-system/` is the source of truth for UI: tokens, 6 themes (`data-theme` on `<html>`, default `ember`), components, guidelines, voice. Load the `talewick-design` skill before any UI work.
 - `src/app/globals.css` imports `design-system/tokens/*.css` directly, so token edits apply to the app. Fonts are self-hosted with next/font (Geist, Geist Mono, Newsreader, Cinzel), not the Google Fonts link in `tokens/fonts.css`.
 - Design system tokens override Tailwind defaults where names match: `rounded-lg` is 14px, `text-xl` is 22px, `shadow-*` and `ease-out` are the system's values.
-- Components in `design-system/components/` are reference `.jsx`. Port to TSX + Tailwind in `src/components/` only when needed. Ported so far: shell (TitleBar `arcane`, WindowControls `pill`), Wordmark, ui (Button, IconButton, Input, Kbd, SegmentedControl, ProgressBar, Tooltip), navigation (Sidebar), reader (BookCover, HypeIndicator), effects (ShaderBackground), arcana (Ornament, OrnateFrame, MoteField).
+- Components in `design-system/components/` are reference `.jsx`. Port to TSX + Tailwind in `src/components/` only when needed. Ported so far: shell (TitleBar `arcane`, WindowControls `pill`), Wordmark, ui (Button, IconButton, Input, Kbd, SegmentedControl, ProgressBar, Tooltip), reader (BookCover, MiniCover, HypeIndicator), effects (ShaderBackground), arcana (Ornament, OrnateFrame, MoteField).
 - Icons: `lucide-react`, `strokeWidth={1.5}`, 14-16px.
-- Library data comes from `useLibrary()` in `src/features/library/use-library.ts`. It returns `sample-library.ts` until import exists; replace it there, not in components.
+- Library data comes from `useLibrary()` in `src/features/library/use-library.ts`. It returns `sample-library.ts` until import exists; replace it there, not in components. The library holds books only (no series or comic sections).
+- Navigation lives in `src/lib/nav.ts` (`MAIN_NAV`, `SETTINGS_NAV`). `src/components/shell/app-sidebar.tsx` renders it with a Recent books list and collapses to an icon rail (Ctrl/Cmd+B). Every page in the nav has a route under `src/app/`; unbuilt ones render `FeaturePlaceholder`. Books open at `/book/?id=<id>`.
+- `design-system/tokens/base.css` is imported into Tailwind's base layer. Imported unlayered, its `a { color }` rule overrode text-* classes on links.
+- Tooltips render in a portal with fixed positioning, so `overflow: hidden` containers never clip them.
 - The design system is not linted and not part of the build. Do not import its `.jsx` into the app.
 
 ## Verifying UI (required)

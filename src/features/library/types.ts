@@ -1,13 +1,11 @@
 import type { HypeLevel } from "@/components/reader/hype-indicator";
 
-export type LibrarySection = "bookshelf" | "series" | "comic";
 
 export interface LibraryBook {
   id: string;
   title: string;
   author: string;
   format: "epub" | "pdf";
-  section: LibrarySection;
   coverUrl?: string;
   /** Reading progress, 0 to 1. */
   progress: number;

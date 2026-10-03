@@ -11,6 +11,10 @@ const DEV_URL = process.env.TALEWICK_DEV_URL ?? "http://localhost:3000";
 // of a Talewick window that is already open.
 if (process.env.TALEWICK_USER_DATA) app.setPath("userData", process.env.TALEWICK_USER_DATA);
 
+// Grayscale anti-aliasing. Subpixel (LCD) text puts colour fringes on light-on-dark text,
+// which reads as jagged at 100% Windows scaling.
+app.commandLine.appendSwitch("disable-lcd-text");
+
 registerAppSchemePrivileges();
 
 if (!app.requestSingleInstanceLock()) {

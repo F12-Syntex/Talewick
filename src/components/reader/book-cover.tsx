@@ -1,13 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { cn } from "@/lib/cn";
-
-const hash = (s: string) => {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
-  return Math.abs(h);
-};
+import { coverGradient, titleHue } from "@/lib/cover";
 
 /**
  * Book cover with 3D tilt, spine shading and a progress strip.
@@ -21,7 +17,7 @@ export function BookCover({
   width = 148,
   tilt = true,
   showMeta = true,
-  onClick,
+  href,
 }: {
   src?: string;
   title: string;
@@ -30,12 +26,13 @@ export function BookCover({
   width?: number;
   tilt?: boolean;
   showMeta?: boolean;
-  onClick?: () => void;
+  /** Makes the whole cover a link. */
+  href?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
   const height = Math.round(width * 1.5);
-  const hue = hash(title) % 360;
+  const hue = titleHue(title);
 
   const onMove = (event: React.MouseEvent) => {
     if (!tilt || !ref.current) return;
@@ -45,17 +42,13 @@ export function BookCover({
   const rx = pointer ? (0.5 - pointer.y) * 10 : 0;
   const ry = pointer ? (pointer.x - 0.5) * 12 : 0;
 
-  const Root = onClick ? "button" : "div";
+  const rootClass = cn(
+    "flex flex-col gap-2.5 text-left",
+    href && "group/cover cursor-pointer rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
+  );
 
-  return (
-    <Root
-      {...(onClick ? { type: "button" as const, onClick } : {})}
-      className={cn(
-        "flex flex-col gap-2.5 text-left",
-        onClick && "cursor-pointer rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
-      )}
-      style={{ width }}
-    >
+  const content = (
+    <>
       <div className="perspective-[800px]">
         <div
           ref={ref}
@@ -72,7 +65,7 @@ export function BookCover({
             boxShadow: pointer
               ? "var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.07)"
               : "var(--shadow-md), 0 0 0 1px rgba(255,255,255,.04)",
-            background: `linear-gradient(160deg, hsl(${hue} 28% 24%), hsl(${(hue + 30) % 360} 32% 9%))`,
+            background: coverGradient(title),
           }}
         >
           {src ? (
@@ -116,10 +109,22 @@ export function BookCover({
       </div>
       {showMeta && (
         <div className="min-w-0">
-          <div className="truncate text-[13px] leading-[17px] font-medium text-fg">{title}</div>
+          <div className="truncate text-sm leading-[18px] font-medium text-fg transition-colors duration-(--dur-base) group-hover/cover:text-accent-hi">
+            {title}
+          </div>
           {author && <div className="mt-0.5 truncate text-xs leading-4 text-fg-muted">{author}</div>}
         </div>
       )}
-    </Root>
+    </>
+  );
+
+  return href ? (
+    <Link href={href} className={rootClass} style={{ width }}>
+      {content}
+    </Link>
+  ) : (
+    <div className={rootClass} style={{ width }}>
+      {content}
+    </div>
   );
 }

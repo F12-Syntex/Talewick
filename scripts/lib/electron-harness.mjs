@@ -76,9 +76,29 @@ export async function withApp({ mode = "prod", url, width = 1280, height = 820 }
         devUrl = `http://localhost:${port}`;
         server = spawn(process.execPath, [path.join(ROOT, "node_modules/next/dist/bin/next"), "dev", "--port", String(port)], {
           cwd: ROOT,
-          stdio: "ignore",
+          stdio: ["ignore", "pipe", "pipe"],
           detached: process.platform !== "win32",
         });
+        // Next allows one dev server per project. If the user's `yarn dev` is running, reuse it.
+        const existing = await new Promise((resolve) => {
+          let output = "";
+          const onData = (chunk) => {
+            output += chunk;
+            if (/already running/i.test(output)) {
+              const match = /Local:\s+(http:\/\/\S+)/.exec(output.slice(output.search(/already running/i)));
+              if (match) resolve(match[1]);
+            }
+          };
+          server.stdout.on("data", onData);
+          server.stderr.on("data", onData);
+          server.once("exit", () => resolve(null));
+          waitForUrl(devUrl).then(() => resolve(null), () => resolve(null));
+        });
+        if (existing) {
+          console.log(`Reusing the running dev server at ${existing}`);
+          devUrl = existing;
+          server = undefined;
+        }
       }
       await waitForUrl(devUrl);
       env.TALEWICK_DEV_URL = devUrl;
@@ -93,6 +113,7 @@ export async function withApp({ mode = "prod", url, width = 1280, height = 820 }
         if (msg.type() === "error" || msg.type() === "warning") logs.push({ type: msg.type(), text: msg.text() });
       });
       win.on("pageerror", (err) => logs.push({ type: "pageerror", text: String(err) }));
+      win.on("requestfailed", (req) => logs.push({ type: "requestfailed", text: `${req.url()} (${req.failure()?.errorText})` }));
       await win.setViewportSize({ width, height });
       await win.waitForLoadState("load");
       await win.evaluate(() => document.fonts.ready);
