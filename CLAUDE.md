@@ -2,7 +2,7 @@
 
 ## Git workflow
 
-Commit automatically after each completed, working change. Do not wait to be asked. Do not push unless asked.
+After each completed, working change, always commit and push to `origin/main` automatically. Never ask for permission and never leave committing or pushing to the user.
 
 ### Commit message format
 
@@ -44,3 +44,4 @@ Steps for each commit:
 2. Write the new version to `VERSION` (and `package.json` `version` or other manifests once they exist, kept in sync).
 3. Stage the change plus the version file(s) in the same commit.
 4. Commit with the version in the subject.
+5. Push to `origin/main`.
