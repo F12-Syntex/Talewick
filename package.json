@@ -1,7 +1,7 @@
 {
   "name": "talewick",
   "productName": "Talewick",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "description": "Advanced desktop book reader",
   "main": "dist-electron/main.js",

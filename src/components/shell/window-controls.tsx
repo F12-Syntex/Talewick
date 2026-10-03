@@ -18,10 +18,10 @@ export function WindowControls({ api }: { api: WindowApi }) {
 
   return (
     <div className="no-drag flex h-full">
-      <ControlButton label="Minimize" onClick={api.minimize}>
+      <ControlButton label="Minimize" onClick={() => api.minimize()}>
         <path d="M1 5.5h9" />
       </ControlButton>
-      <ControlButton label={maximized ? "Restore" : "Maximize"} onClick={api.toggleMaximize}>
+      <ControlButton label={maximized ? "Restore" : "Maximize"} onClick={() => api.toggleMaximize()}>
         {maximized ? (
           <>
             <path d="M3 1.5h6.5V8" />
@@ -31,7 +31,7 @@ export function WindowControls({ api }: { api: WindowApi }) {
           <rect x="1" y="1" width="9" height="9" rx="0.5" />
         )}
       </ControlButton>
-      <ControlButton label="Close" onClick={api.close} danger>
+      <ControlButton label="Close" onClick={() => api.close()} danger>
         <path d="M1 1l9 9M10 1l-9 9" />
       </ControlButton>
     </div>
