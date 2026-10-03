@@ -6,7 +6,7 @@ Advanced desktop book reader. Electron + Next.js (App Router, static export) + R
 
 Package manager is yarn (v1). Never use npm or commit a `package-lock.json`.
 
-- `yarn dev`: Next dev server on :3000 plus Electron pointed at it (`--dev`). F12 toggles DevTools in dev only.
+- `yarn dev`: `scripts/dev.mjs` starts Next dev on the first free port from 3000 and Electron pointed at it (`--dev`, URL via `TALEWICK_DEV_URL`). F12 toggles DevTools in dev only.
 - `yarn build`: `next build` to `out/`, then esbuild bundles `electron/` to `dist-electron/`.
 - `yarn start`: run the production build in Electron.
 - `yarn dist`: package installers into `release/` (electron-builder).

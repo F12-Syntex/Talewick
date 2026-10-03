@@ -1,14 +1,12 @@
 {
   "name": "talewick",
   "productName": "Talewick",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "description": "Advanced desktop book reader",
   "main": "dist-electron/main.js",
   "scripts": {
-    "dev": "concurrently -k -n next,electron -c blue,magenta \"yarn dev:next\" \"yarn dev:electron\"",
-    "dev:next": "next dev --port 3000",
-    "dev:electron": "yarn build:electron && wait-on tcp:3000 && electron . --dev",
+    "dev": "node scripts/dev.mjs",
     "build": "next build && yarn build:electron",
     "build:electron": "esbuild electron/main.ts electron/preload.ts --bundle --platform=node --format=cjs --target=node22 --outdir=dist-electron --external:electron --sourcemap",
     "start": "electron .",

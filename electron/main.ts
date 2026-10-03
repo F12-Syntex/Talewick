@@ -5,7 +5,7 @@ import { APP_ORIGIN, registerAppSchemePrivileges, serveStaticExport } from "./pr
 import { createMainWindow } from "./window";
 
 const isDev = process.argv.includes("--dev");
-const DEV_URL = "http://localhost:3000";
+const DEV_URL = process.env.TALEWICK_DEV_URL ?? "http://localhost:3000";
 
 registerAppSchemePrivileges();
 
