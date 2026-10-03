@@ -19,3 +19,6 @@ release/
 
 # local tooling
 .claude/settings.local.json
+
+# screenshots from yarn snap
+.snapshots/

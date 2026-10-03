@@ -7,6 +7,10 @@ import { createMainWindow } from "./window";
 const isDev = process.argv.includes("--dev");
 const DEV_URL = process.env.TALEWICK_DEV_URL ?? "http://localhost:3000";
 
+// Tests and screenshot runs use their own profile so they don't hit the single-instance lock
+// of a Talewick window that is already open.
+if (process.env.TALEWICK_USER_DATA) app.setPath("userData", process.env.TALEWICK_USER_DATA);
+
 registerAppSchemePrivileges();
 
 if (!app.requestSingleInstanceLock()) {

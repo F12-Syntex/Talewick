@@ -11,6 +11,7 @@ Package manager is yarn (v1). Never use npm or commit a `package-lock.json`.
 - `yarn start`: run the production build in Electron.
 - `yarn dist`: package installers into `release/` (electron-builder).
 - `yarn typecheck` / `yarn lint`: run both before every commit.
+- `yarn snap` / `yarn snap:dev`: screenshot the real Electron app (production build / dev mode) into `.snapshots/`. See Verifying UI below.
 
 ## Structure
 
@@ -90,7 +91,25 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `design-system/` is the source of truth for UI: tokens, 6 themes (`data-theme` on `<html>`, default `ember`), components, guidelines, voice. Load the `talewick-design` skill before any UI work.
 - `src/app/globals.css` imports `design-system/tokens/*.css` directly, so token edits apply to the app. Fonts are self-hosted with next/font (Geist, Geist Mono, Newsreader, Cinzel), not the Google Fonts link in `tokens/fonts.css`.
 - Design system tokens override Tailwind defaults where names match: `rounded-lg` is 14px, `text-xl` is 22px, `shadow-*` and `ease-out` are the system's values.
-- Components in `design-system/components/` are reference `.jsx`. Port to TSX + Tailwind in `src/components/` only when needed. Ported so far: shell (TitleBar `arcane`, WindowControls `pill`), Wordmark, ui (Button, IconButton, Input, Kbd, SegmentedControl, ProgressBar, Tooltip), navigation (Sidebar), reader (BookCover, HypeIndicator), effects (ShaderBackground, SpotlightCard), arcana (Ornament, OrnateFrame, MoteField).
+- Components in `design-system/components/` are reference `.jsx`. Port to TSX + Tailwind in `src/components/` only when needed. Ported so far: shell (TitleBar `arcane`, WindowControls `pill`), Wordmark, ui (Button, IconButton, Input, Kbd, SegmentedControl, ProgressBar, Tooltip), navigation (Sidebar), reader (BookCover, HypeIndicator), effects (ShaderBackground), arcana (Ornament, OrnateFrame, MoteField).
 - Icons: `lucide-react`, `strokeWidth={1.5}`, 14-16px.
 - Library data comes from `useLibrary()` in `src/features/library/use-library.ts`. It returns `sample-library.ts` until import exists; replace it there, not in components.
 - The design system is not linted and not part of the build. Do not import its `.jsx` into the app.
+
+## Verifying UI (required)
+
+Every UI change must be looked at in the running app before it is committed. Typecheck and lint passing is not enough.
+
+1. Run both `yarn snap` (production build) and `yarn snap:dev` (dev mode). Dev mode runs React StrictMode, which mounts every effect twice; bugs that only show there (e.g. a WebGL canvas going blank) are invisible in production.
+2. Open the PNGs in `.snapshots/` and actually inspect them. Add `--hover "<selector>"` for hover states.
+3. Both runs must report `console: clean`. They exit 1 on console errors or warnings.
+4. For interactions (clicks, typing, keyboard shortcuts), write a short script using `withApp()` from `scripts/lib/electron-harness.mjs`.
+5. If the user's `yarn dev` is already running, use `yarn snap:dev --url http://localhost:3000` instead of starting a second dev server. The harness uses its own temporary profile (`TALEWICK_USER_DATA`), so it works next to an open Talewick window.
+
+Never run `yarn add` / `yarn install` while a Talewick window is open. Windows locks Electron's files, the install aborts halfway and leaves `node_modules/electron/dist` and `node_modules/.bin` broken. Ask the user to close the app first.
+
+Effects must survive StrictMode's mount, unmount, mount cycle: clean up listeners and animation frames, but never destroy something the next mount reuses (for example, do not call `WEBGL_lose_context` on a canvas).
+
+## Design preferences
+
+- No cursor-following glows (spotlight cards, glare that tracks the mouse). The user finds them too much. Hover feedback is a shadow, colour or border change. The 3D tilt on book covers is fine.

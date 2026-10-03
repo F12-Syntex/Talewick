@@ -78,7 +78,8 @@ export function useShader(
     gl.linkProgram(program);
     gl.useProgram(program);
 
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     const position = gl.getAttribLocation(program, "p");
     gl.enableVertexAttribArray(position);
@@ -130,7 +131,10 @@ export function useShader(
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      // Free GPU objects but keep the context: StrictMode re-runs this effect on the same canvas,
+      // and a context lost via WEBGL_lose_context cannot be used again (renders blank or broken).
+      gl.deleteBuffer(buffer);
+      gl.deleteProgram(program);
     };
   }, [canvasRef, frag, uniforms, speed, paused, maxDpr]);
 }

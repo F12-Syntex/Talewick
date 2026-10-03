@@ -1,6 +1,5 @@
 import { ArrowRight } from "lucide-react";
 import { OrnateFrame } from "@/components/arcana/ornate-frame";
-import { SpotlightCard } from "@/components/effects/spotlight-card";
 import { BookCover } from "@/components/reader/book-cover";
 import { HypeIndicator } from "@/components/reader/hype-indicator";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,7 @@ export function ContinueReadingCard({ book, onResume }: { book: LibraryBook; onR
   const percent = Math.round(book.progress * 100);
   return (
     <OrnateFrame crest glow offset={-6} size={16} className="mt-7">
-      <SpotlightCard onClick={onResume} contentClassName="p-[18px]">
+      <div className="rounded-lg border border-border bg-surface p-[18px] shadow-sm transition-shadow duration-(--dur-slow) ease-out hover:shadow-lg">
         <div className="flex items-center gap-5">
           <BookCover width={84} title={book.title} author={book.author} src={book.coverUrl} showMeta={false} tilt={false} />
           <div className="min-w-0 flex-1">
@@ -43,7 +42,7 @@ export function ContinueReadingCard({ book, onResume }: { book: LibraryBook; onR
             Resume
           </Button>
         </div>
-      </SpotlightCard>
+      </div>
     </OrnateFrame>
   );
 }

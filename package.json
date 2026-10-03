@@ -1,7 +1,7 @@
 {
   "name": "talewick",
   "productName": "Talewick",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "description": "Advanced desktop book reader",
   "main": "dist-electron/main.js",
@@ -12,7 +12,9 @@
     "start": "electron .",
     "dist": "yarn build && electron-builder",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit && tsc -p electron/tsconfig.json"
+    "typecheck": "tsc --noEmit && tsc -p electron/tsconfig.json",
+    "snap": "yarn -s build && node scripts/snapshot.mjs",
+    "snap:dev": "yarn -s build:electron && node scripts/snapshot.mjs --dev"
   },
   "dependencies": {
     "lucide-react": "^1.51.0",
@@ -31,6 +33,7 @@
     "esbuild": "^0.28.2",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.3.8",
+    "playwright-core": "^1.63.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "wait-on": "^9.5.1"

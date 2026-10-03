@@ -10,7 +10,7 @@ const hash = (s: string) => {
 };
 
 /**
- * Book cover with 3D tilt, cursor glare, spine shading and a progress strip.
+ * Book cover with 3D tilt, spine shading and a progress strip.
  * Without `src` it renders a generated cover tinted from the title.
  */
 export function BookCover({
@@ -103,16 +103,7 @@ export function BookCover({
             aria-hidden
             className="absolute inset-y-0 left-0 w-2.5 bg-[linear-gradient(90deg,rgba(0,0,0,.4),rgba(255,255,255,.1)_45%,transparent)]"
           />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 transition-opacity duration-(--dur-base)"
-            style={{
-              opacity: pointer ? 1 : 0,
-              background: pointer
-                ? `radial-gradient(circle at ${pointer.x * 100}% ${pointer.y * 100}%, rgba(255,255,255,.2), transparent 55%)`
-                : undefined,
-            }}
-          />
+
           {progress != null && (
             <div className="absolute inset-x-0 bottom-0 h-[3px] bg-black/55">
               <div
