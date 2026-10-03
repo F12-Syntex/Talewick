@@ -1,0 +1,19 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Core" subtitle="Button, IconButton, Badge, Kbd, Icon" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:18px;box-sizing:border-box}.l{font-family:var(--font-mono);font-size:10px;color:var(--fg-subtle);text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px}.r{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const DS = window.TalewickDesignSystem_fc8a08;
+const { Button, IconButton, Icon, Kbd, Badge, Input, Switch, Slider, SegmentedControl, Tooltip, Dialog, Toast, Spinner, DotPulse, Skeleton, TextScramble, ProgressBar, WickLoader, HypeIndicator, BookCover, ChapterRow, Sidebar, ShaderBackground, SpotlightCard } = DS;
+function Demo(){return(<div>
+<p className="l">Button variants</p><div className="r"><Button icon={<Icon name="plus"/>}>Import books</Button><Button variant="secondary">Details</Button><Button variant="ghost">Cancel</Button><Button variant="danger">Delete</Button><Button loading>Saving</Button><Button disabled>Disabled</Button></div>
+<p className="l">Sizes</p><div className="r"><Button size="sm">Small</Button><Button size="md">Medium</Button><Button size="lg" iconRight={<Icon name="arrow-right"/>}>Resume reading</Button></div>
+<p className="l">IconButton · Badge · Kbd</p><div className="r"><IconButton label="Search" icon={<Icon name="search"/>}/><IconButton label="Bookmark" active icon={<Icon name="bookmark"/>}/><IconButton label="Settings" variant="secondary" icon={<Icon name="settings"/>}/><IconButton label="Play" variant="primary" icon={<Icon name="play"/>}/><Badge>EPUB</Badge><Badge tone="accent" dot>Reading</Badge><Badge tone="success" dot>Formatted</Badge><Badge tone="heat-5" variant="outline">Wild</Badge><Kbd keys={["⌘","K"]}/></div>
+</div>);}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script></body></html>

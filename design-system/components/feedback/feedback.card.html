@@ -1,0 +1,18 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Feedback & loaders" subtitle="WickLoader, Spinner, DotPulse, TextScramble, Skeleton, ProgressBar, Toast" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:18px;box-sizing:border-box}.l{font-family:var(--font-mono);font-size:10px;color:var(--fg-subtle);text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px}.r{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const DS = window.TalewickDesignSystem_fc8a08;
+const { Button, IconButton, Icon, Kbd, Badge, Input, Switch, Slider, SegmentedControl, Tooltip, Dialog, Toast, Spinner, DotPulse, Skeleton, TextScramble, ProgressBar, WickLoader, HypeIndicator, BookCover, ChapterRow, Sidebar, ShaderBackground, SpotlightCard } = DS;
+function Demo(){const [p,setP]=React.useState(.2);React.useEffect(()=>{const i=setInterval(()=>setP(x=>x>=1?.05:x+.15),900);return()=>clearInterval(i)},[]);return(<div>
+<div className="r" style={{gap:28,alignItems:"flex-end"}}><WickLoader size={40} label="Wick"/><WickLoader size={40} heat={1} edge="var(--heat-4)" label="Hot"/><div style={{display:"flex",flexDirection:"column",gap:14}}><div className="r" style={{margin:0}}><Spinner/><Spinner size={22}/><DotPulse/></div><TextScramble text="Formatting chapter 214" loop style={{fontSize:13,color:"var(--fg)"}}/></div><div style={{width:180,display:"flex",flexDirection:"column",gap:12}}><ProgressBar value={p}/><ProgressBar indeterminate/><Skeleton lines={2} height={10}/></div></div>
+<div className="r"><Toast tone="accent" icon={<Icon name="quote" size={15}/>} title="Quote saved" description="Added to The Ashen Lantern" duration={5000} onClose={()=>{}}/><Toast tone="success" icon={<Icon name="check" size={15}/>} title="Chapter formatted" action={<Button size="sm" variant="secondary">Open</Button>} style={{width:290}}/></div>
+</div>);}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script></body></html>

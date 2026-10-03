@@ -16,8 +16,9 @@ export function WindowControls({ api }: { api: WindowApi }) {
     };
   }, [api]);
 
+  // Bridge calls are wrapped so React's event object never crosses contextBridge.
   return (
-    <div className="no-drag flex h-full">
+    <div className="no-drag flex h-full items-center gap-0.5 pr-1.5">
       <ControlButton label="Minimize" onClick={() => api.minimize()}>
         <path d="M1 5.5h9" />
       </ControlButton>
@@ -28,7 +29,7 @@ export function WindowControls({ api }: { api: WindowApi }) {
             <rect x="1" y="3" width="6.5" height="6.5" rx="0.5" />
           </>
         ) : (
-          <rect x="1" y="1" width="9" height="9" rx="0.5" />
+          <rect x="1" y="1" width="9" height="9" rx="1.5" />
         )}
       </ControlButton>
       <ControlButton label="Close" onClick={() => api.close()} danger>
@@ -55,11 +56,13 @@ function ControlButton({
       aria-label={label}
       title={label}
       onClick={onClick}
-      className={`grid h-full w-12 place-items-center text-fg-muted transition-colors duration-150 hover:text-fg ${
-        danger ? "hover:bg-[#c42b1c] hover:text-white" : "hover:bg-surface-hover"
+      className={`grid size-7 cursor-default place-items-center rounded-[8px] text-fg-muted transition-[color,background-color,transform,box-shadow] duration-[var(--dur-fast)] ease-out active:scale-90 ${
+        danger
+          ? "hover:bg-danger hover:text-on-danger hover:shadow-[0_0_14px_-2px_color-mix(in_srgb,var(--danger)_70%,transparent)]"
+          : "hover:bg-surface-hover hover:text-fg"
       }`}
     >
-      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1">
+      <svg width="10" height="10" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.2">
         {children}
       </svg>
     </button>

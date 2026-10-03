@@ -1,0 +1,16 @@
+<!-- @dsCard group="Components" viewport="700x320" name="Navigation" subtitle="Sidebar with sliding indicator" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:18px;box-sizing:border-box}.l{font-family:var(--font-mono);font-size:10px;color:var(--fg-subtle);text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px}.r{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const DS = window.TalewickDesignSystem_fc8a08;
+const { Button, IconButton, Icon, Kbd, Badge, Input, Switch, Slider, SegmentedControl, Tooltip, Dialog, Toast, Spinner, DotPulse, Skeleton, TextScramble, ProgressBar, WickLoader, HypeIndicator, BookCover, ChapterRow, Sidebar, ShaderBackground, SpotlightCard } = DS;
+function Demo(){const [a,setA]=React.useState("library");const items=[{section:"Read"},{id:"library",label:"Library",icon:<Icon name="library"/>,badge:128},{id:"reading",label:"Reading now",icon:<Icon name="book-open"/>},{id:"quotes",label:"Quotes",icon:<Icon name="quote"/>,badge:42},{section:"AI"},{id:"wiki",label:"Wiki",icon:<Icon name="network"/>},{id:"buddy",label:"Buddy",icon:<Icon name="sparkles"/>}];return(<div style={{height:284,display:"flex",border:"1px solid var(--border)",borderRadius:12,overflow:"hidden"}}>
+<Sidebar items={items} activeId={a} onSelect={setA} footer={<Button variant="ghost" size="sm" icon={<Icon name="settings"/>}>Settings</Button>}/><div style={{flex:1,display:"grid",placeItems:"center",color:"var(--fg-subtle)",fontSize:12}}>click items</div></div>);}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script></body></html>

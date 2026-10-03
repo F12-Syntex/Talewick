@@ -1,0 +1,47 @@
+/* Talewick colour tokens. :root = Ember theme (default). Other themes live in themes.css. */
+:root{
+--background:#0e0e11;
+--surface:#141418;
+--surface-raised:#18181d;
+--surface-hover:#1f1f25;
+--surface-glass:rgba(22,22,27,0.72);
+--surface-tooltip:rgba(30,30,37,0.92);
+--border:#23232a;
+--border-strong:#2e2e37;
+--border-glass:rgba(255,255,255,0.08);
+--fg:#ececf1;
+--fg-muted:#8b8b98;
+--fg-subtle:#5c5c68;
+/* Accent: candle gold. accent-2: the theme's second magic hue. */
+--accent:#c9a26b;
+--accent-hi:#e3bf8a;
+--accent-lo:#9a7746;
+--accent-glow:rgba(201,162,107,0.38);
+--on-accent:#1a1206;
+--accent-2:#e8743a;
+--accent-2-glow:rgba(232,116,58,0.35);
+--knob:#fffaf0;
+--backdrop:rgba(4,4,6,0.55);
+/* Status */
+--success:#4fd1a1;
+--danger:#c42b1c;
+--danger-fg:#ff8a7d;
+--on-danger:#ffffff;
+/* Heat ramp: hype indicator levels 1-5 */
+--heat-1:#7d93b2;
+--heat-2:#c9a26b;
+--heat-3:#ec8a3c;
+--heat-4:#f4552e;
+--heat-5:#ff2d6f;
+/* Semantic aliases (re-declared under [data-theme] in themes.css so they resolve per scope) */
+--ornament:color-mix(in srgb,var(--accent) 70%,var(--fg-muted));
+--surface-app:var(--background);
+--surface-chrome:var(--surface);
+--surface-card:var(--surface);
+--surface-hovered:var(--surface-hover);
+--border-subtle:var(--border);
+--text-body:var(--fg);
+--text-muted:var(--fg-muted);
+--text-faint:color-mix(in srgb,var(--fg-muted) 40%,transparent);
+--text-accent:var(--accent);
+}

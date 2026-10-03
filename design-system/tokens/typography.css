@@ -1,0 +1,25 @@
+:root{
+--font-sans:"Geist",system-ui,sans-serif;
+--font-mono:"Geist Mono",ui-monospace,monospace;
+--font-serif:"Newsreader",Georgia,serif;
+--font-display:"Cinzel","Newsreader",serif;
+--tracking-display:0.04em;
+--tracking-rune:0.18em;
+--text-2xs:11px;--text-2xs-lh:14px;
+--text-xs:12px;--text-xs-lh:16px;
+--text-sm:14px;--text-sm-lh:20px;
+--text-base:16px;--text-base-lh:24px;
+--text-lg:18px;--text-lg-lh:26px;
+--text-xl:22px;--text-xl-lh:28px;
+--text-2xl:30px;--text-2xl-lh:36px;
+--text-display:44px;--text-display-lh:48px;
+--weight-regular:400;--weight-medium:500;--weight-semibold:600;
+--tracking-tight:-0.015em;
+--tracking-wide:0.025em;
+--tracking-caps:0.06em;
+--tracking-wordmark:0.3em;
+--font-ui:var(--font-sans);
+--font-reading:var(--font-serif);
+--type-chrome-title-size:var(--text-xs);
+--type-chrome-title-weight:var(--weight-medium);
+}

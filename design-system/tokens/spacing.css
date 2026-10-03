@@ -1,0 +1,18 @@
+:root{
+/* Tailwind 4px base unit */
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;--space-12:48px;--space-20:80px;
+/* Window chrome (title-bar.tsx, window-controls.tsx, window.ts) */
+--titlebar-height:36px;
+--titlebar-pad-x:16px;
+--titlebar-pad-mac:80px;
+--window-control-width:48px;
+--window-control-icon:11px;
+--window-control-stroke:1px;
+--window-default-w:1280px;--window-default-h:820px;
+--window-min-w:900px;--window-min-h:600px;
+--border-width:1px;
+--radius-none:0;
+/* Motion: Tailwind transition-colors defaults */
+--duration-fast:150ms; /* @kind other */
+--ease-standard:cubic-bezier(0.4,0,0.2,1); /* @kind other */
+}

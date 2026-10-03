@@ -1,44 +1,68 @@
 @import "tailwindcss";
 
-/* Design tokens. Themes later override these variables. */
+/*
+ * Design tokens come from the design system (design-system/tokens).
+ * fonts.css is skipped on purpose: fonts are self-hosted via next/font in layout.tsx.
+ * Token names that match Tailwind's (--radius-*, --shadow-*, --font-*, --ease-*, --text-*)
+ * are unlayered here, so they override Tailwind's defaults: `rounded-lg` = 14px,
+ * `shadow-md`, `ease-out`, `text-xl` = 22px all resolve to design system values.
+ */
+@import "../../design-system/tokens/colors.css";
+@import "../../design-system/tokens/typography.css";
+@import "../../design-system/tokens/spacing.css";
+@import "../../design-system/tokens/effects.css";
+@import "../../design-system/tokens/motion.css";
+@import "../../design-system/tokens/themes.css";
+@import "../../design-system/tokens/base.css";
+
+/* Point the font tokens at the self-hosted next/font families. */
 :root {
-  --background: #0e0e11;
-  --surface: #141418;
-  --surface-hover: #1f1f25;
-  --border: #23232a;
-  --fg: #ececf1;
-  --fg-muted: #8b8b98;
-  --accent: #c9a26b;
+  --font-sans: var(--nf-geist), system-ui, sans-serif;
+  --font-mono: var(--nf-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--nf-newsreader), Georgia, serif;
+  --font-display: var(--nf-cinzel), var(--nf-newsreader), serif;
 }
 
+/* Tailwind utilities for tokens whose names differ from Tailwind's namespaces. */
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
   --color-surface-hover: var(--surface-hover);
+  --color-surface-glass: var(--surface-glass);
+  --color-surface-tooltip: var(--surface-tooltip);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-glass: var(--border-glass);
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-faint: var(--text-faint);
   --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent-hi: var(--accent-hi);
+  --color-accent-lo: var(--accent-lo);
+  --color-accent-glow: var(--accent-glow);
+  --color-on-accent: var(--on-accent);
+  --color-accent-2: var(--accent-2);
+  --color-ornament: var(--ornament);
+  --color-knob: var(--knob);
+  --color-backdrop: var(--backdrop);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-danger-fg: var(--danger-fg);
+  --color-on-danger: var(--on-danger);
+  --color-heat-1: var(--heat-1);
+  --color-heat-2: var(--heat-2);
+  --color-heat-3: var(--heat-3);
+  --color-heat-4: var(--heat-4);
+  --color-heat-5: var(--heat-5);
 }
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  background: var(--background);
-  color: var(--fg);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Electron window dragging for the frameless title bar. */
-.drag {
-  -webkit-app-region: drag;
-}
-.no-drag {
-  -webkit-app-region: no-drag;
+/* New Tailwind keys. Placeholder values; the design system tokens above win. */
+@theme {
+  --font-display: serif;
+  --shadow-glow: none;
+  --shadow-inset-top: none;
+  --ease-out-expo: ease-out;
+  --ease-spring: ease-out;
 }

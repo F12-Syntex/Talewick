@@ -1,0 +1,6 @@
+html,body{height:100%}
+body{margin:0;background:var(--background);color:var(--fg);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--fg)}
+.drag{-webkit-app-region:drag}
+.no-drag{-webkit-app-region:no-drag}

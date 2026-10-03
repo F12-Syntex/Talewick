@@ -1,0 +1,20 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Reader" subtitle="HypeIndicator, BookCover, ChapterRow" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{padding:18px;box-sizing:border-box}.l{font-family:var(--font-mono);font-size:10px;color:var(--fg-subtle);text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px}.r{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const DS = window.TalewickDesignSystem_fc8a08;
+const { Button, IconButton, Icon, Kbd, Badge, Input, Switch, Slider, SegmentedControl, Tooltip, Dialog, Toast, Spinner, DotPulse, Skeleton, TextScramble, ProgressBar, WickLoader, HypeIndicator, BookCover, ChapterRow, Sidebar, ShaderBackground, SpotlightCard } = DS;
+function Demo(){return(<div style={{display:"flex",gap:22}}>
+<div style={{display:"flex",gap:14}}><BookCover width={104} title="The Ashen Lantern" author="M. Ravel" progress={.42}/><BookCover width={104} title="Saltglass" author="Ines Kort" progress={.9}/></div>
+<div style={{flex:1,minWidth:0}}><p className="l">HypeIndicator 0–5</p><div className="r" style={{gap:14}}>{[0,1,2,3,4,5].map(l=><HypeIndicator key={l} level={l}/>)}</div>
+<div className="r"><HypeIndicator level={3} variant="pill"/><HypeIndicator level={5} variant="pill"/><HypeIndicator level={4} variant="meter" showLabel/></div>
+<ChapterRow number={212} title="Ash on the Water" meta="14 min" hype={2} state="read"/><ChapterRow number={213} title="The Bell Tolls Twice" meta="18 min · 41%" hype={4} state="current"/><ChapterRow number={214} title="Nine Lanterns Burning" meta="22 min" hype={5}/></div>
+</div>);}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script></body></html>
